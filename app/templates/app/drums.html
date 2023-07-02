@@ -1,0 +1,37 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% block title %}{% endblock title %}
+{% block main-content %}
+<div class="container my-5">
+ <div class="row">
+  <div class="col-sm-3">
+   <div class="list-group bg-secondary">
+     <a href="{% url 'drums' %}" class="list-group-item list-group-item-action " aria-current="true">All Brands</a>
+     <a href="{% url 'drums-data' 'Yamaha'  %}" class="list-group-item list-group-item-action " aria-current="true">Yamaha</a>
+     <a href="{% url 'drums-data' 'Volt'  %}" class="list-group-item list-group-item-action ">Volt</a>
+     <a href="{% url 'drums-data' 'below'  %}" class="list-group-item list-group-item-action ">Below 5000</a>
+     <a href="{% url 'drums-data' 'above'  %}" class="list-group-item list-group-item-action ">Above 10000</a>
+   </div>
+  </div>
+  <div class="col-sm-6"> 
+  <div class="container-fluid">
+   <div class="row">
+    {% for product in drums %}
+     <div class="col-sm-4 text-center mb-4">
+      <a href="{% url 'product-detail' product.id %}" class="btn">
+       <div class="item">
+        <img src="{{product.product_image.url}}" alt="" height="320" width='353px' class="border mr-3 pd-40">
+        <div class="fw-bold">{{product.title}}</div>
+        <div class="fw-bold">Rs. {{product.discounted_price}} <small class="fw-light text-decoration-line-through">{{product.selling_price}}</small></div>
+    
+       </div>
+      </a>
+     </div>
+     </div>
+    {% endfor %}
+   </div>
+  </div>
+ </div>
+</div>
+</div>
+{% endblock main-content %}
